@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddLogging(builder => {
+    builder.AddConsole();
+});
 
 builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(options => {
     options.UseSqlite(ApplicationDbContext.ConnectionString, o => o.MigrationsAssembly("BlazorTemplate.Data.Migrations"));

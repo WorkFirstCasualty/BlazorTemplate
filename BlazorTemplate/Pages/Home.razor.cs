@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorTemplate.Pages;
-public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory) {
+public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory, ILogger<Home> logger) {
 
     private readonly IDbContextFactory<ApplicationDbContext> _dbFactory = dbFactory;
+    private readonly ILogger<Home> _logger = logger;
 
     private GridItemsProvider<Worker> _provider = default!;
     private int _totalItemsCount;
@@ -21,6 +22,8 @@ public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory) {
                 TotalItemCount = 0
             };
             try {
+                _logger.LogInformation("Loading workers from database...");
+                _logger.LogInformation("Applying filters, StartIndex: {}, Count: {}, Sorting On: {}", request.StartIndex, request.Count, string.Join(", ", request.GetSortByProperties()));
                 await using var db = await _dbFactory.CreateDbContextAsync(request.CancellationToken);
                 var workersQuery = db.Workers
                     .AsNoTracking()
