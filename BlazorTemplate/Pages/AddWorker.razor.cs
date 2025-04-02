@@ -1,5 +1,6 @@
 using BlazorTemplate.Data;
 using BlazorTemplate.Data.Entities;
+using BlazorTemplate.Ext;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -31,7 +32,7 @@ public partial class AddWorker(IDbContextFactory<ApplicationDbContext> dbFactory
             FirstName = _model.FirstName,
             LastName = _model.LastName,
             Email = _model.Email,
-            PhoneNumber = _model.PhoneNumber,
+            PhoneNumber = _model.PhoneNumber.FormatAsPhoneNumber(),
             BirthDate = _model.BirthDate!.Value
         };
 
