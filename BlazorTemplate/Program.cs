@@ -12,16 +12,19 @@ builder.Services.AddLogging(builder => {
     builder.AddConsole();
 });
 
-builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(options => {
+// Setup Entity Framework
+builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(options => { 
     options.UseSqlite(ApplicationDbContext.ConnectionString, o => o.MigrationsAssembly("BlazorTemplate.Data.Migrations"));
 });
 var app = builder.Build();
 
+// Migrate the database in development mode for ease of use. 
+var dbFactory = app.Services.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
+var db = dbFactory.CreateDbContext();
+db.Database.Migrate();
+
 if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage();
-    var dbFactory = app.Services.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
-    var db = dbFactory.CreateDbContext();
-    db.Database.Migrate();
 }
 else { // Configure the HTTP request pipeline.
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
