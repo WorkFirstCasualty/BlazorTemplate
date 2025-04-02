@@ -20,7 +20,9 @@ When adding new pages, be sure to include `@rendermode InteractiveServer` at the
 The [Community Edition](https://visualstudio.microsoft.com/vs/community/) is free to use
 1. **Clone the Repository** 
 
-```git clone https://github.com/WorkFirstCasualty/BlazorTemplate.git```
+```
+git clone https://github.com/WorkFirstCasualty/BlazorTemplate.git
+```
 
 2. **Open the Solution in Visual Studio**
 3. Make sure that `BlazorTemplate` is set as the startup project.
@@ -29,13 +31,21 @@ The [Community Edition](https://visualstudio.microsoft.com/vs/community/) is fre
 #### .NET CLI [Install Instructions](https://learn.microsoft.com/en-us/dotnet/core/tools/)
 1. **Clone the Repository**
 
-```git clone https://github.com/WorkFirstCasualty/BlazorTemplate.git```
+```
+git clone https://github.com/WorkFirstCasualty/BlazorTemplate.git
+```
 
 2. **Navigate to the BlazorTemplate directory**
-```cd BlazorTemplate```
+
+```
+cd BlazorTemplate
+```
 
 3. **To run the application in development mode**
-```dotnet watch --project BlazorTemplate```
+ 
+```
+dotnet watch --project BlazorTemplate
+```
 
 ## Projects
 
@@ -66,7 +76,11 @@ are yet to be implemented.
 ## Gotchas
 - Ensure that you have the correct Blazor Rendermode setup when testing a page. If buttons, forms, datagrids, or anything else that requires interactivity is not working, the first thing to check is if the page/component is setup to use `@rendermode InteractiveServer`.
 - When changing/updating the database scheme in the [Entities](https://github.com/WorkFirstCasualty/BlazorTemplate/tree/main/BlazorTemplate.Data/Entities) folder. You must then create a new migration and update the database. 
-This can be done by opening a terminal/command prompt and navigating to the `BlazorTemplate.Data.Migrations` project directory. Then run the following command: (requires [.NET Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)) `dotnet ef migrations add <MigrationName>`
+Once you start the application the database will automatically be updated to the latest migration. This can be done by opening a terminal/command prompt and navigating to the `BlazorTemplate.Data.Migrations` 
+project directory. Then run the following command: (requires [.NET Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)) 
+```
+dotnet ef migrations add <MigrationName>
+```
 Once you start the application the database will automatically be updated to the latest migration.
 ## Useful Links
 - [Blazor documentation](https://docs.microsoft.com/en-us/aspnet/core/blazor/)
