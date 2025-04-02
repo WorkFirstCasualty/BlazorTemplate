@@ -1,10 +1,17 @@
 ﻿using BlazorTemplate.Components;
+using BlazorTemplate.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+
+builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(options => {
+    options.UseSqlite(ApplicationDbContext.ConnectionString);
+});
 
 var app = builder.Build();
 
