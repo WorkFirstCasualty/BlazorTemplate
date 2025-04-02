@@ -6,6 +6,37 @@ BlazorTemplate is a [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor
 This project mainly consists of a Code First Entity Framework Core database and a Blazor front end. This project is setup to use [Interactive Server](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes) rendering where needed to enable interactive web pages.
 When adding new pages, be sure to include `@rendermode InteractiveServer` at the top of the `.razor` file to enable interactive rendering.
 
+## Build Instructions
+
+### Prerequisites
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
+- [Not required, but recommended] [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) with the following workloads:
+  - ASP.NET and web development
+  - .NET Core cross-platform development
+
+### Steps to Build
+
+#### [Recommended] Visual Studio 
+The [Community Edition](https://visualstudio.microsoft.com/vs/community/) is free to use
+1. **Clone the Repository** 
+
+```git clone https://github.com/WorkFirstCasualty/BlazorTemplate.git```
+
+2. **Open the Solution in Visual Studio**
+3. Make sure that `BlazorTemplate` is set as the startup project.
+4. Click "Run" within Visual Studio to build and run the application. 
+
+#### .NET CLI [Install Instructions](https://learn.microsoft.com/en-us/dotnet/core/tools/)
+1. **Clone the Repository**
+
+```git clone https://github.com/WorkFirstCasualty/BlazorTemplate.git```
+
+2. **Navigate to the BlazorTemplate directory**
+```cd BlazorTemplate```
+
+3. **To run the application in development mode**
+```dotnet watch --project BlazorTemplate```
+
 ## Projects
 
 ### BlazorTemplate
