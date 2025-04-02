@@ -1,0 +1,51 @@
+﻿@page "/AddWorker"
+@rendermode InteractiveServer
+
+<PageTitle>Add Worker</PageTitle>
+
+<EditForm Model="@_model" OnValidSubmit="SubmitWorkerAsync">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>
+        <label>
+            First Name:
+            <InputText @bind-Value="_model.FirstName" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Last Name:
+            <InputText @bind-Value="_model.LastName" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Email:
+            <InputText @bind-Value="_model.Email" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Phone Number:
+            <InputText @bind-Value="_model.PhoneNumber" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Date of Birth:
+            <InputDate @bind-Value="_model.BirthDate" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Company:
+            <InputSelect @bind-Value="_model.AssignedCompanyId">
+                @foreach (var company in _companies ?? []) {
+                    <option value="@company.CompanyId">@company.Name</option>
+                }
+            </InputSelect>
+
+        </label>
+    </div>
+
+</EditForm>
