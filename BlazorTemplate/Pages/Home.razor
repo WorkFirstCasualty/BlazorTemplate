@@ -1,7 +1,25 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@rendermode InteractiveServer
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Workers</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="home-card">
+    <div>
+        Total items: @_totalItemsCount
+    </div>
+    <QuickGrid ItemsProvider="@_provider" Virtualize="true">
+        <PropertyColumn Property="@(p => p.FirstName)" Sortable="true" IsDefaultSortColumn="true" Title="First Name" />
+        <PropertyColumn Property="@(p => p.LastName)" Sortable="true" Title="Last Name" />
+        <PropertyColumn Property="@(p => p.Email)" Sortable="true" Title="Email" />
+        <PropertyColumn Property="@(p => p.PhoneNumber)" Sortable="true" Title="Phone Number" />
+        <PropertyColumn Property="@(p => p.BirthDate)" Format="MM/dd/yyyy" Sortable="true" Title="Date of Birth" />
+    </QuickGrid>
+</div>
 
-Welcome to your new app.
+<a class="btn btn-primary btn-lg add-worker-btn" href="AddWorker">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+    </svg>
+    Add Worker
+</a>

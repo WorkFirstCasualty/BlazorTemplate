@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorTemplate.Data\BlazorTemplate.Data.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorTemplate.Data.Migrations\BlazorTemplate.Data.Migrations.csproj" />
   </ItemGroup>
 
 </Project>
