@@ -5,15 +5,16 @@ using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorTemplate.Pages;
-public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory, ILogger<Home> logger) {
 
+public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory, ILogger<Home> logger) {
     private readonly IDbContextFactory<ApplicationDbContext> _dbFactory = dbFactory;
     private readonly ILogger<Home> _logger = logger;
 
+    private QuickGrid<Worker> _dataGrid = default!;
     private GridItemsProvider<Worker> _provider = default!;
     private int _totalItemsCount;
-    private QuickGrid<Worker> _dataGrid = default!;
 
+    /// <inheritdoc />
     protected override async Task OnInitializedAsync() {
         await base.OnInitializedAsync();
 
@@ -51,6 +52,10 @@ public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory, ILo
         };
     }
 
+    /// <summary>
+    /// Deletes the provided worker from the database.
+    /// </summary>
+    /// <param name="workerId">The id of the worker to delete.</param>
     private async Task DeleteWorkerAsync(int workerId) {
         _logger.LogInformation("Deleting worker with id {}", workerId);
         await using var db = await _dbFactory.CreateDbContextAsync();
