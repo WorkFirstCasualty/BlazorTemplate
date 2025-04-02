@@ -7,39 +7,40 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div>
-        <label>
+        <label class="form-label">
             First Name:
-            <InputText @bind-Value="_model.FirstName" />
+            <InputText class="form-control" @bind-Value="_model.FirstName" />
         </label>
     </div>
     <div>
-        <label>
+        <label class="form-label">
             Last Name:
-            <InputText @bind-Value="_model.LastName" />
+            <InputText class="form-control" @bind-Value="_model.LastName" />
         </label>
     </div>
     <div>
-        <label>
+        <label class="form-label">
             Email:
-            <InputText @bind-Value="_model.Email" />
+            <InputText class="form-control"@bind-Value="_model.Email" />
         </label>
     </div>
     <div>
-        <label>
+        <label class="form-label">
             Phone Number:
-            <InputText @bind-Value="_model.PhoneNumber" />
+            <InputText class="form-control"@bind-Value="_model.PhoneNumber" />
         </label>
     </div>
     <div>
-        <label>
+        <label class="form-label">
             Date of Birth:
-            <InputDate @bind-Value="_model.BirthDate" />
+            <InputDate class="form-control"@bind-Value="_model.BirthDate" />
         </label>
     </div>
     <div>
-        <label>
+        <label class="form-label">
             Company:
-            <InputSelect @bind-Value="_model.AssignedCompanyId">
+            <InputSelect class="form-select" @bind-Value="_model.AssignedCompanyId">
+                <option selected>Select a company from the list</option>
                 @foreach (var company in _companies ?? []) {
                     <option value="@company.CompanyId">@company.Name</option>
                 }
@@ -47,5 +48,7 @@
 
         </label>
     </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 
 </EditForm>
