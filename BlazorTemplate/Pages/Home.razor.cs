@@ -12,6 +12,7 @@ public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory, ILo
 
     private GridItemsProvider<Worker> _provider = default!;
     private int _totalItemsCount;
+    private QuickGrid<Worker> _dataGrid = default!;
 
     protected override async Task OnInitializedAsync() {
         await base.OnInitializedAsync();
@@ -27,6 +28,7 @@ public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory, ILo
                 await using var db = await _dbFactory.CreateDbContextAsync(request.CancellationToken);
                 var workersQuery = db.Workers
                     .AsNoTracking()
+                    .Include(c => c.AssignedCompany)
                     .Skip(request.StartIndex);
 
                 if (request.Count.HasValue) {
@@ -47,5 +49,23 @@ public partial class Home(IDbContextFactory<ApplicationDbContext> dbFactory, ILo
             catch when (request.CancellationToken.IsCancellationRequested) { } // Ignore
             return providerResult;
         };
+    }
+
+    private async Task DeleteWorkerAsync(int workerId) {
+        _logger.LogInformation("Deleting worker with id {}", workerId);
+        await using var db = await _dbFactory.CreateDbContextAsync();
+        var deletedCount = await db.Workers
+              .Where(w => w.WorkerId == workerId)
+              .ExecuteDeleteAsync();
+
+        if (deletedCount != 0) {
+            _logger.LogInformation("Successfully deleted worker {}", workerId);
+            if (_dataGrid is not null) {
+                await _dataGrid.RefreshDataAsync();
+            }
+        }
+        else {
+            _logger.LogWarning("Worker with id {} could not be deleted. Does it exist?", workerId);
+        }
     }
 }
