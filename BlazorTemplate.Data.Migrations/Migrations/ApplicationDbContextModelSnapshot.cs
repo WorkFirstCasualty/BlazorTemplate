@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlazorTemplate.Data.Migrations
+namespace BlazorTemplate.Data.Migrations.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -29,7 +29,24 @@ namespace BlazorTemplate.Data.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("Companies", (string)null);
+                    b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            CompanyId = 1,
+                            Name = "Work First Casualty Company"
+                        },
+                        new
+                        {
+                            CompanyId = 2,
+                            Name = "Widget Company LLC"
+                        },
+                        new
+                        {
+                            CompanyId = 3,
+                            Name = "Awesome Enterprises"
+                        });
                 });
 
             modelBuilder.Entity("BlazorTemplate.Data.Entities.Worker", b =>
@@ -64,7 +81,19 @@ namespace BlazorTemplate.Data.Migrations
 
                     b.HasIndex("AssignedCompanyId");
 
-                    b.ToTable("Workers", (string)null);
+                    b.ToTable("Workers");
+
+                    b.HasData(
+                        new
+                        {
+                            WorkerId = 1,
+                            AssignedCompanyId = 1,
+                            BirthDate = new DateOnly(1996, 1, 1),
+                            Email = "nate@email.com",
+                            FirstName = "Nate",
+                            LastName = "Tripp",
+                            PhoneNumber = "(555) 555-5555"
+                        });
                 });
 
             modelBuilder.Entity("BlazorTemplate.Data.Entities.Worker", b =>

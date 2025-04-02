@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlazorTemplate.Data.Migrations
+namespace BlazorTemplate.Data.Migrations.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250402145942_InitialMigration")]
+    [Migration("00000000000000_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -33,6 +33,23 @@ namespace BlazorTemplate.Data.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            CompanyId = 1,
+                            Name = "Work First Casualty Company"
+                        },
+                        new
+                        {
+                            CompanyId = 2,
+                            Name = "Widget Company LLC"
+                        },
+                        new
+                        {
+                            CompanyId = 3,
+                            Name = "Awesome Enterprises"
+                        });
                 });
 
             modelBuilder.Entity("BlazorTemplate.Data.Entities.Worker", b =>
@@ -68,6 +85,18 @@ namespace BlazorTemplate.Data.Migrations
                     b.HasIndex("AssignedCompanyId");
 
                     b.ToTable("Workers");
+
+                    b.HasData(
+                        new
+                        {
+                            WorkerId = 1,
+                            AssignedCompanyId = 1,
+                            BirthDate = new DateOnly(1996, 1, 1),
+                            Email = "nate@email.com",
+                            FirstName = "Nate",
+                            LastName = "Tripp",
+                            PhoneNumber = "(555) 555-5555"
+                        });
                 });
 
             modelBuilder.Entity("BlazorTemplate.Data.Entities.Worker", b =>

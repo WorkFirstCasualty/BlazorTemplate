@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BlazorTemplate.Data.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace BlazorTemplate.Data.Migrations.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration
@@ -46,6 +48,21 @@ namespace BlazorTemplate.Data.Migrations
                         principalTable: "Companies",
                         principalColumn: "CompanyId");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Companies",
+                columns: new[] { "CompanyId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Work First Casualty Company" },
+                    { 2, "Widget Company LLC" },
+                    { 3, "Awesome Enterprises" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Workers",
+                columns: new[] { "WorkerId", "AssignedCompanyId", "BirthDate", "Email", "FirstName", "LastName", "PhoneNumber" },
+                values: new object[] { 1, 1, new DateOnly(1996, 1, 1), "nate@email.com", "Nate", "Tripp", "(555) 555-5555" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Workers_AssignedCompanyId",
