@@ -81,10 +81,23 @@ project directory. Then run the following command: (requires [.NET Core CLI](htt
 ```
 dotnet ef migrations add <MigrationName>
 ```
-Once you start the application the database will automatically be updated to the latest migration.
+- When quering the database using [LINQ](https://learn.microsoft.com/en-us/dotnet/csharp/linq) relational entities are not automatically populated. For example:
+```csharp
+var workers = db.Workers.ToList()
+```
+Will only contain a list of Worker entites and the `AssociatedCompany` property will be null. To include the `AssociatedCompany` property in the query you must use the `Include` method:
+```csharp
+var workers = db.Workers.Include(w => w.AssociatedCompany).ToList()
+```
+- When calling the above code, Entity Framework will track changies to each Worker Entity. Meaning if you change a property on a Worker Entity and then call `db.SaveChanges()` the changes will be saved to the database.
+If you do not want this behavior by default, you must add `NoTracking` to your LINQ statement:
+```csharp
+var workers = db.Workers.AsNoTracking().ToList()
+```
 ## Useful Links
 - [Blazor documentation](https://docs.microsoft.com/en-us/aspnet/core/blazor/)
 - [Information about Blazor render modes](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes)
 - [Entity Framework Core documentation](https://docs.microsoft.com/en-us/ef/core/)
 - [EF Migrations documentation](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations)
 - [.NET Core CLI installation instructions](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
+- [LINQ Documentation](https://learn.microsoft.com/en-us/dotnet/csharp/linq)
