@@ -1,1 +1,45 @@
-# BlazorTemplate
+# BlazorTemplate# BlazorTemplate
+
+## Overview
+BlazorTemplate is a [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) project that demonstrates the use of Blazor components and Entity Framework Core for building interactive web applications. The solution consists of multiple projects, each serving a specific purpose.
+
+This project mainly consists of a Code First Entity Framework Core database and a Blazor front end. This project is setup to use [Interactive Server](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes) rendering where needed to enable interactive web pages.
+When adding new pages, be sure to include `@rendermode InteractiveServer` at the top of the `.razor` file to enable interactive rendering.
+
+## Projects
+
+### BlazorTemplate
+This is the main Blazor project that contains the Blazor components and pages. It references the `BlazorTemplate.Data.Migrations` project for database migrations.
+
+### BlazorTemplate.Data
+This project contains the Entity Framework Core data models and the DbContext for the application.
+
+[Entity Framework Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
+
+### BlazorTemplate.Data.Migrations
+This project contains the Entity Framework Core (EF) migrations for the application. It references the `BlazorTemplate.Data` project.
+To add a migration open a command prompt and navigate to the `BlazorTemplate.Data.Migrations` project directory. Then run the following command in the terminal: (requires [.NET Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet))
+```
+dotnet ef migrations add <MigrationName>
+````
+More information about migrations can be found [here](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations).
+
+## Blazor Pages
+- [Home.razor](https://github.com/WorkFirstCasualty/BlazorTemplate/blob/main/BlazorTemplate/Pages/Home.razor) and [Home.razor.cs](https://github.com/WorkFirstCasualty/BlazorTemplate/blob/main/BlazorTemplate/Pages/Home.razor.cs)
+contain the logic for the home page. This page displays a list of workers in the database and allows the user to delete and add new workers.
+- [AddWorker.razor](https://github.com/WorkFirstCasualty/BlazorTemplate/blob/main/BlazorTemplate/Pages/AddWorker.razor) and [AddWorker.razor.cs](https://github.com/WorkFirstCasualty/BlazorTemplate/blob/main/BlazorTemplate/Pages/AddWorker.razor.cs)
+contain the logic and form for the user to add a new worker. This page uses Blazor's built in [EditForm](https://learn.microsoft.com/en-us/aspnet/core/blazor/forms) (found about a quarter the way down) to handle form submission and validation.
+- [Companies.razor](https://github.com/WorkFirstCasualty/BlazorTemplate/blob/main/BlazorTemplate/Pages/Companies.razor) and [Companies.razor.cs](https://github.com/WorkFirstCasualty/BlazorTemplate/blob/main/BlazorTemplate/Pages/Companies.razor.cs)
+are yet to be implemented.
+
+## Gotchas
+- Ensure that you have the correct Blazor Rendermode setup when testing a page. If buttons, forms, datagrids, or anything else that requires interactivity is not working, the first thing to check is if the page/component is setup to use `@rendermode InteractiveServer`.
+- When changing/updating the database scheme in the [Entities](https://github.com/WorkFirstCasualty/BlazorTemplate/tree/main/BlazorTemplate.Data/Entities) folder. You must then create a new migration and update the database. 
+This can be done by opening a terminal/command prompt and navigating to the `BlazorTemplate.Data.Migrations` project directory. Then run the following command: (requires [.NET Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)) `dotnet ef migrations add <MigrationName>`
+Once you start the application the database will automatically be updated to the latest migration.
+## Useful Links
+- [Blazor documentation](https://docs.microsoft.com/en-us/aspnet/core/blazor/)
+- [Information about Blazor render modes](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes)
+- [Entity Framework Core documentation](https://docs.microsoft.com/en-us/ef/core/)
+- [EF Migrations documentation](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations)
+- [.NET Core CLI installation instructions](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
